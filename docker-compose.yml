@@ -1,0 +1,10 @@
+services:
+  ban:
+    build: .
+    image: ban-accessories:latest
+    ports: ["3000:3000"]
+    env_file: .env
+    volumes: ["ban-data:/data"]   # base SQLite + photos des articles
+    restart: unless-stopped
+volumes:
+  ban-data:

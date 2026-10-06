@@ -1,0 +1,12 @@
+(()=>{const rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+const h=document.querySelector('header');addEventListener('scroll',()=>h.classList.toggle('sm',scrollY>40),{passive:true});
+document.querySelectorAll('.hero-s').forEach(s=>{const sl=[...s.querySelectorAll('.sl')],dots=s.querySelector('.dots');let i=0,t;
+  const reset=()=>{clearInterval(t);if(!rm)t=setInterval(()=>go(i+1),6500)};
+  const go=k=>{i=(k+sl.length)%sl.length;sl.forEach((x,j)=>x.classList.toggle('on',j===i));[...dots.children].forEach((d,j)=>d.classList.toggle('on',j===i));reset()};
+  sl.forEach((_,k)=>{const b=document.createElement('button');b.setAttribute('aria-label','Diapositive '+(k+1));b.onclick=()=>go(k);dots.append(b)});
+  s.querySelector('.pv').onclick=()=>go(i-1);s.querySelector('.nx').onclick=()=>go(i+1);
+  s.onmouseenter=()=>clearInterval(t);s.onmouseleave=reset;go(0)});
+document.querySelectorAll('.car').forEach(c=>{const tr=c.querySelector('.track'),m=d=>()=>tr.scrollBy({left:d*tr.clientWidth*.8,behavior:'smooth'});c.querySelector('.pv').onclick=m(-1);c.querySelector('.nx').onclick=m(1)});
+})();
